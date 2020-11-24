@@ -1,24 +1,41 @@
-import logo from './logo.svg';
+import Login from 'views/Login';
+import Setup from 'views/Setup';
+import Game from 'views/Game';
+import Scoreboard from 'views/Scoreboard';
+
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import rootReducer from 'store/index.js';
+
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 import './App.css';
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Router>
+        <div className='App'>
+          <Switch>
+            <Route path='/'>
+              <Login />
+            </Route>
+            <Route path='/setup'>
+              <Setup />
+            </Route>
+            <Route path='/game'>
+              <Game />
+            </Route>
+            <Route path='/scoreboard'>
+              <Scoreboard />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    </Provider>
   );
 }
 
