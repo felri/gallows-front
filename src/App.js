@@ -10,7 +10,7 @@ import rootReducer from 'store/index.js';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import './App.css';
+import 'App.css';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
@@ -20,7 +20,7 @@ function App() {
       <Router>
         <div className='App'>
           <Switch>
-            <Route path='/'>
+            <Route exact path='/'>
               <Login />
             </Route>
             <Route path='/setup'>

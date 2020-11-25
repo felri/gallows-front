@@ -1,0 +1,18 @@
+.subtitle-setup {
+  font-size: 44px;
+  color: var(--black);
+}
+
+.container-options-setup {
+  text-align: center;
+  width: 500px;
+  height: 500px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.subcontainer-options-setup {
+  margin-top: 20px;
+}

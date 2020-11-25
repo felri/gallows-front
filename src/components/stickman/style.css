@@ -1,0 +1,22 @@
+.container-stikman {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.inside-container-stikman {
+  position: relative;
+}
+
+.container-rope-img {
+  position: absolute;
+  height: 299px;
+  right: 94px;
+}
+
+.container-body-img {
+  position: absolute;
+  height: 269px;
+  right: 19px;
+  top: 285px;
+}

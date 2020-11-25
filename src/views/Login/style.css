@@ -1,0 +1,25 @@
+.subtitle-login {
+  font-size: 44px;
+  color: var(--black);
+}
+
+.container-options-login {
+  text-align: center;
+  width: 500px;
+  height: 300px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.subcontainer-options-login {
+  margin-top: 70px;
+}
+
+.subtitle-login {
+  font-size: 144px;
+  color: var(--red);
+  letter-spacing: 0.3rem;
+  -webkit-text-stroke: 10px var(--black);
+}
