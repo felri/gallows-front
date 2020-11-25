@@ -1,34 +1,15 @@
 import React from 'react';
 import './style.css';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
 import Stickman from 'components/stickman';
+import { Error, Input, Btn, BtnWhite } from 'components/baseComponents';
+import api from 'utils/api';
 
 const Title = () => <div className='title'>The</div>;
 
 const SubTitle = () => <div className='subtitle-login'>Hangman</div>;
-
-const Error = ({ children }) => <div classNmae='error-form'>{children}</div>;
-
-const Input = ({ value, type, handleChange }) => (
-  <input
-    className='input-form'
-    value={value}
-    onChange={(e) => handleChange(e.target.value, type)}
-    placeholder={type.charAt(0).toUpperCase() + type.slice(1)}
-    type={type}
-  />
-);
-
-const Btn = ({ children, handleClick }) => (
-  <div onClick={handleClick} className='btn'>
-    {children}
-  </div>
-);
-
-const BtnWhite = ({ children, handleClick }) => (
-  <div onClick={handleClick} className='btn-white'>
-    {children}
-  </div>
-);
 
 const LoginOrRegister = ({ handleClick }) => (
   <>
@@ -61,6 +42,9 @@ function Login(props) {
   const [password, setPassword] = React.useState('');
   const [error, setError] = React.useState('');
 
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const handleClick = (option) => {
     setName('');
     setPassword('');
@@ -72,9 +56,41 @@ function Login(props) {
     else setPassword(value);
   };
 
-  const handleRegister = () => {};
+  const handleRegister = async () => {
+    if (!name.length || !password.length) setError('Name or password invalid');
+    else {
+      try {
+        setError('');
+        const data = await api.createUser({ name, password });
+        if (data.error) setError(data.error);
+        else {
+          dispatch({ type: 'SET_USER', payload: data });
+          history.push('/setup');
+        }
+      } catch (e) {
+        console.log(e);
+        setError('Something went wrong, please try again');
+      }
+    }
+  };
 
-  const handleLogin = () => {};
+  const handleLogin = async () => {
+    if (!name.length || !password.length) setError('Name or password invalid');
+    else {
+      try {
+        setError('');
+        const data = await api.getUser({ name, password });
+        if (data.error) setError(data.error);
+        else {
+          dispatch({ type: 'SET_USER', payload: data });
+          history.push('/setup');
+        }
+      } catch (e) {
+        console.log(e);
+        setError('Something went wrong, please try again');
+      }
+    }
+  };
 
   return (
     <div className='container'>
@@ -87,14 +103,14 @@ function Login(props) {
             <RegisterForm
               name={name}
               password={password}
-              handleClick={handleClick}
+              handleClick={handleRegister}
               handleChange={handleChange}
               error={error}
             />
           )}
           {step === 3 && (
             <LoginForm
-              handleClick={handleClick}
+              handleClick={handleLogin}
               name={name}
               password={password}
               handleChange={handleChange}

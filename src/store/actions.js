@@ -1,4 +1,4 @@
-import { SET_NAME } from 'store/types';
+import { SET_USER } from 'store/types';
 
 import axios from 'axios';
 
@@ -22,7 +22,7 @@ export const addTodo = ({ title, userId }) => {
 };
 
 export const setName = (name) => ({
-  type: SET_NAME,
+  type: SET_USER,
   payload: {
     ...name,
   },

@@ -1,6 +1,7 @@
 .subtitle-setup {
   font-size: 44px;
   color: var(--black);
+  margin-bottom: 40px;
 }
 
 .container-options-setup {
@@ -15,4 +16,35 @@
 
 .subcontainer-options-setup {
   margin-top: 20px;
+}
+
+.container-wordmaster {
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.container-wordmaster-option {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.container-wordmaster-option label {
+  font-size: 35px;
+}
+
+.btn-wordmaster-option {
+  height: 40px;
+  width: 40px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s;
+  border: 10px solid var(--black);
+}
+
+.btn-wordmaster-option:hover {
+  opacity: 0.7;
 }

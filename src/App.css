@@ -66,3 +66,8 @@
   align-items: center;
   transition: 0.2s;
 }
+
+.error-form {
+  color: var(--red);
+  margin-bottom: 6px;
+}

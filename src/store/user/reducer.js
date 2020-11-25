@@ -1,15 +1,39 @@
 import types from 'store/types';
 
 const initialState = {
-  name: '',
+  user: {},
+  secondPlayer: {},
+  wordMaster: 1,
+  opponent: 'machine',
 };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case types.SET_NAME:
+    case types.SET_USER:
       return {
         ...state,
-        name: action.payload.name,
+        user: {
+          name: action.payload.data.name,
+          id: action.payload.data.id,
+        },
+      };
+    case types.SET_SECOND_USER:
+      return {
+        ...state,
+        secondPlayer: {
+          name: action.payload.data.name,
+          id: action.payload.data.id,
+        },
+      };
+    case types.SET_WORDMASTER:
+      return {
+        ...state,
+        wordMaster: action.payload,
+      };
+    case types.SET_OPPONENT:
+      return {
+        ...state,
+        opponent: action.payload,
       };
     default:
       return state;
