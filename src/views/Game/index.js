@@ -122,7 +122,6 @@ function Game(props) {
   const dispatch = useDispatch();
 
   const getWord = async () => {
-    console.log(opponent);
     if (!word.length || opponent !== 'ai')
       try {
         const data = await api.getWord();
