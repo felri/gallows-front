@@ -4,7 +4,8 @@ const initialState = {
   user: {},
   secondPlayer: {},
   wordMaster: 1,
-  opponent: 'machine',
+  opponent: 'ai',
+  word: '',
 };
 
 export default function reducer(state = initialState, action) {
@@ -29,6 +30,11 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         wordMaster: action.payload,
+      };
+    case types.SET_WORD:
+      return {
+        ...state,
+        word: action.payload,
       };
     case types.SET_OPPONENT:
       return {

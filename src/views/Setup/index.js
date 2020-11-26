@@ -5,6 +5,7 @@ import { Error, Input, Btn, BtnWhite } from 'components/baseComponents';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import api from 'utils/api';
+import HomeBtn from 'components/homeBtn';
 
 const Title = () => <div className='title'>Setup</div>;
 
@@ -55,6 +56,28 @@ const Select = ({ handleClick }) => (
   </>
 );
 
+const CreateWord = ({ handleClick }) => {
+  const [word, setWord] = React.useState('');
+
+  const handleSend = () => {
+    if (word.length > 0) handleClick(word);
+  };
+
+  return (
+    <>
+      <SubTitle>Create word</SubTitle>
+      <Input
+        value={word}
+        type={'Banana...'}
+        handleChange={(e) =>
+          setWord(e.replace(/\W/g, '').replace(/[0-9]/g, ''))
+        }
+      />
+      <Btn handleClick={handleSend}>Start</Btn>
+    </>
+  );
+};
+
 function Setup(props) {
   const [step, setStep] = React.useState(1);
   const [name, setName] = React.useState('');
@@ -63,6 +86,7 @@ function Setup(props) {
 
   const user = useSelector((state) => state.userRedcuer.user);
   const wordMaster = useSelector((state) => state.userRedcuer.wordMaster);
+  const opponent = useSelector((state) => state.userRedcuer.opponent);
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -90,19 +114,26 @@ function Setup(props) {
   };
 
   const handleOption = (option) => {
-    if (option) setStep(option);
-    else {
-      dispatch({ type: 'SET_OPPONENT', payload: 'machine' });
+    if (option) {
+      setStep(option);
+      dispatch({ type: 'SET_OPPONENT', payload: 'ai' });
+    } else {
+      dispatch({ type: 'SET_OPPONENT', payload: 'human' });
+      handleWordMaster(2);
       goToGame();
     }
   };
 
   const handleWordMaster = (option) => {
-    dispatch({ type: 'SET_OPPONENT', payload: 'human' });
     dispatch({ type: 'SET_WORDMASTER', payload: option });
   };
 
-  const goToGame = () => {
+  const selectWord = () => {
+    setStep(4);
+  };
+
+  const goToGame = (word) => {
+    if (word) dispatch({ type: 'SET_WORD', payload: word });
     history.push('/game');
   };
 
@@ -128,13 +159,15 @@ function Setup(props) {
           {step === 3 && (
             <WordMaster
               handleChange={handleWordMaster}
-              handleClick={goToGame}
+              handleClick={selectWord}
               wordMaster={wordMaster}
             />
           )}
+          {step === 4 && <CreateWord handleClick={goToGame} />}
         </div>
       </div>
       <Stickman />
+      <HomeBtn />
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import './style.css';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import HomeBtn from 'components/homeBtn';
 
 import Stickman from 'components/stickman';
 import { Error, Input, Btn, BtnWhite } from 'components/baseComponents';

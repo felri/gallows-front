@@ -9,7 +9,7 @@ function Stickman(props) {
     <div className='container-stikman'>
       <div className='inside-container-stikman'>
         <img src={RopePng} className='container-rope-img' />
-        <img src={StickmanPng} className='container-body-img' />
+        <img src={StickmanPng} className='container-fullbody-img' />
       </div>
     </div>
   );
